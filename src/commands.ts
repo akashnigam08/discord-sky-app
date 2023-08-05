@@ -104,6 +104,35 @@ const STOP_RANDOM_PING_COMMAND = {
   type: 1,
 };
 
-const ALL_COMMANDS = [START_COMMAND, STOP_COMMAND, START_RANDOM_PING_COMMAND, STOP_RANDOM_PING_COMMAND];
+// Start random gif pinging
+const START_RANDOM_GIF_PING_COMMAND = {
+  name: 'startgifping',
+  description: 'Start pinging random members with random gifs on this channel',
+  type: 1,
+  options: [
+    {
+      type: 4,
+      name: 'interval',
+      description: 'Time between each ping in seconds',
+      required: true,
+    },
+  ],
+};
+
+// Stop random gif pinging
+const STOP_RANDOM_GIF_PING_COMMAND = {
+  name: 'stopgifping',
+  description: 'Stop pinging random members with random gifs on this channel',
+  type: 1,
+};
+
+const ALL_COMMANDS = [
+  START_COMMAND,
+  STOP_COMMAND,
+  START_RANDOM_PING_COMMAND,
+  STOP_RANDOM_PING_COMMAND,
+  START_RANDOM_GIF_PING_COMMAND,
+  STOP_RANDOM_GIF_PING_COMMAND,
+];
 
 InstallGlobalCommands(process.env.APP_ID as string, ALL_COMMANDS);

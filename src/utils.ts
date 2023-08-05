@@ -67,13 +67,20 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export async function sendMessage(message: string, channelId: string) {
+export async function sendMessage(message: string, channelId: string, image?: string) {
   const endpoint = `channels/${channelId}/messages`;
 
   try {
     await DiscordRequest(endpoint, {
       method: 'POST',
-      body: { content: message },
+      body: {
+        content: message,
+        ...image ? {
+          embeds: [{
+            image: { url: image }
+          }]
+        } : {}
+      },
     });
   } catch (err) {
     console.error('Error sending message: ', err);
@@ -126,4 +133,16 @@ export function sendResponseMessage(res: Response, message: string) {
       content: message,
     }
   });
+}
+
+export async function getRandomGif() {
+  const url = `https://api.giphy.com/v1/gifs/random?api_key=${process.env.GIPHY_API_KEY}&tag=funny&rating=g`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return (data as any).data.images.original.url;
+  } catch (err) {
+    console.error('Error getting random gif: ', err);
+    return '';
+  }
 }
