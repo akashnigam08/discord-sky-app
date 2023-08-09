@@ -136,7 +136,7 @@ export function sendResponseMessage(res: Response, message: string) {
 }
 
 export async function getRandomGif() {
-  const url = `https://api.giphy.com/v1/gifs/random?api_key=${process.env.GIPHY_API_KEY}&tag=funny&rating=g`;
+  const url = `https://api.giphy.com/v1/gifs/random?api_key=${process.env.GIPHY_API_KEY}&tag=dank meme`;
   try {
     const res = await fetch(url);
     const data = await res.json();
